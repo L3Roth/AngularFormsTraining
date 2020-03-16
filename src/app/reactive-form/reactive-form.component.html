@@ -1,0 +1,54 @@
+<div id="toppadding"> 
+    <div class="container">
+        <div *ngIf="!submitted">
+            <h1>Reactive Form</h1>
+            <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit(reactiveForm)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" formControlName="name" />
+                    <div class="alert alert-danger" [hidden]="reactiveForm.controls.name.valid">Name is required</div>
+                </div>
+                <div class="form-group">
+                    <label for="alias">Alias</label>
+                    <input type="text" class="form-control" formControlName="alias" />
+                    <div class="alert alert-danger" [hidden]="reactiveForm.controls.alias.valid">Alias is required</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Programmer Email</label>
+                    <input type="email" class="form-control" formControlName="email" />
+                    <div class="alert alert-danger" [hidden]="reactiveForm.controls.email.valid">Email is required and must be a valid email pattern</div>
+                </div>
+                <div class="form-group">
+                    <label for="skill">Programmer Skill</label>
+                    <select class="form-control" formControlName="skill">
+                    <option *ngFor="let s of skills" [value]="s">{{s}}</option>
+                    </select>
+                    <div class="alert alert-danger" [hidden]="reactiveForm.controls.skill.valid">Skill is required</div>
+                </div>
+                <button type="submit" class="btn btn-default" [disabled]="!reactiveForm.valid">Submit</button> 
+            </form>  
+        </div>
+                                    
+        <div *ngIf="submitted">
+            <h2>You submitted the following:</h2>
+            <div class="row">
+                <div class="col-md-2">Name</div>
+                <div class="col-md-10 pull-left">{{ submittedModel.name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Alias</div>
+                <div class="col-md-10 pull-left">{{ submittedModel.alias }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Hero Email</div>
+                <div class="col-md-10 pull-left">{{ submittedModel.email }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Skill</div>
+                <div class="col-md-10 pull-left">{{ submittedModel.skill }}</div>
+            </div>
+            <br />
+            <button class="btn btn-default" (click)="submitted=false">Edit</button>
+        </div>    
+    </div>
+</div>
